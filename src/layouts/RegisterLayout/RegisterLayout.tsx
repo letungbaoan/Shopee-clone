@@ -2,12 +2,13 @@ import Footer from "src/components/Footer"
 import RegisterHeader from "src/components/RegisterHeader"
 
 interface Props {
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  text: string
 }
 
-export default function RegisterLayout({children} : Props) {
+export default function RegisterLayout({children, text} : Props) {
   return <div>
-    <RegisterHeader />
+    <RegisterHeader text={text} />
     {children}
     <Footer />
   </div>

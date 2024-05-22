@@ -11,12 +11,13 @@ import { AppContext } from 'src/contexts/app.context'
 import { ErrorResponse } from 'src/types/utils.type'
 import { Schema, schema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import path from 'src/constants/path'
 
 type FormData = Omit<Schema, 'confirm_password'>
 const loginSchema = schema.omit(['confirm_password'])
 
 export default function Login() {
-  const { setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const navigate = useNavigate()
   const {
     register,
@@ -35,6 +36,7 @@ export default function Login() {
     loginAccountMutation.mutate(data, {
       onSuccess: (data) => {
         setIsAuthenticated(true)
+        setProfile(data.data.data.user)
         navigate('/')
       },
       onError: (error) => {
@@ -90,7 +92,7 @@ export default function Login() {
               </div>
               <div className='flex items-center justify-center mt-8'>
                 <span className='text-gray-400'>Bạn chưa có tài khoản?</span>
-                <Link className='text-red-400 ml-1' to='/register'>
+                <Link className='text-red-400 ml-1' to={path.register}>
                   Đăng ký
                 </Link>
               </div>

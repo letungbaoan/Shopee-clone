@@ -1,28 +1,32 @@
 import { Link } from 'react-router-dom'
+import { Product as ProductType } from 'src/types/product.type'
+import { formatCurrency, formatNumberToSocialStyle } from 'src/utils/utils'
 
-export default function Product() {
+interface Props {
+  product: ProductType
+}
+
+export default function Product({ product }: Props) {
   return (
     <Link to='/'>
       <div className='bg-white shadow rounded-sm hover:translate-y-[-0.04rem] hover:shadow-md duration-100 transition-transform overflow-hidden'>
         <div className='w-full pt-[100%] relative'>
           <img
-            src='https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-litlkyky6kuk01_tn'
-            alt=''
+            src={product.image}
+            alt={product.name}
             className='absolute top-0 left-0 bg-white w-full h-full object-cover'
           />
         </div>
         <div className='p-2 overflow-hidden'>
-          <div className='min-h-[2rem] line-clamp-2 text-xs'>
-            Quần đùi nam nữ unisex in hình vịt vàng chất liệu umi dày dặn form đẹp thoáng mát - REW2021
-          </div>
+          <div className='min-h-[2rem] line-clamp-2 text-xs'>{product.name}</div>
           <div className='flex items-center mt-3'>
             <div className='line-through max-w-[50%] text-gray-500 truncate'>
               <span className='text-xs'>đ</span>
-              <span>99.000</span>
+              <span>{formatCurrency(product.price_before_discount)}</span>
             </div>
             <div className='text-orange truncate ml-1'>
               <span className='text-xs'>đ</span>
-              <span>65.000</span>
+              <span>{formatCurrency(product.price)}</span>
             </div>
           </div>
           <div className='mt-3 flex items-center justify-start'>
@@ -62,7 +66,7 @@ export default function Product() {
             </div>
             <div className='ml-2 text-sm'>
               <span className='ml-1'>Đã bán </span>
-              <span>5.66k</span>
+              <span>{formatNumberToSocialStyle(product.sold)}</span>
             </div>
           </div>
         </div>

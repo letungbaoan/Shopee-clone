@@ -31,7 +31,7 @@ export default function Product({ product }: Props) {
             </div>
           </div>
           <div className='mt-3 flex items-center justify-start'>
-            <ProductRating rating={product.rating}/>
+            <ProductRating rating={product.rating} />
             <div className='ml-2 text-sm'>
               <span className='ml-1'>Đã bán </span>
               <span>{formatNumberToSocialStyle(product.sold)}</span>

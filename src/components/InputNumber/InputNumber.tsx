@@ -1,28 +1,29 @@
+import { onChange } from 'node_modules/react-toastify/dist/core/store'
 import React, { InputHTMLAttributes } from 'react'
-import { RegisterOptions, UseFormRegister } from 'react-hook-form'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   classNameInput?: string
   classNameError?: string
-  register?: UseFormRegister<any>
-  rules?: RegisterOptions
 }
 
-export default function Input({
-  name,
-  register,
+export default function InputNumber({
   className,
   errorMessage,
-  rules,
   classNameInput = 'p-3 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm',
   classNameError = 'mt-1 text-red-600 min-h-[1.25rem] text-sm text-left',
+  onChange,
   ...rest
 }: Props) {
-  const registerResult = register && name ? { ...register(name, rules) } : null
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target
+    if((/^\d+$/.test(value) || value === '') && onChange) {
+      onChange(event)
+    }
+  }
   return (
     <div className={className}>
-      <input className={classNameInput} {...registerResult} {...rest} />
+      <input className={classNameInput} onChange={handleChange} {...rest} />
       <div className={classNameError}>{errorMessage}</div>
     </div>
   )

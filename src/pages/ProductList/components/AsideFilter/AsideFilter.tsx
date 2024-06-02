@@ -1,6 +1,6 @@
 import { Link, createSearchParams } from 'react-router-dom'
 import Button from 'src/components/Button'
-import Input from 'src/components/input'
+import Input from 'src/components/Input'
 import path from 'src/constants/path'
 import { Category } from 'src/types/category.type'
 import { QueryConfig } from '../../ProductList'

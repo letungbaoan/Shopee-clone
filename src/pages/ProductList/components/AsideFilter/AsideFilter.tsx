@@ -143,7 +143,7 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                   <InputNumber
                     type='text'
                     className='grow'
-                    placeholder='đ TỪ'
+                    placeholder='₫ TỪ'
                     {...field}
                     onChange={(event) => {
                       field.onChange(event)
@@ -164,7 +164,7 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                   <InputNumber
                     type='text'
                     className='grow'
-                    placeholder='đ ĐẾN'
+                    placeholder='₫ ĐẾN'
                     {...field}
                     onChange={(event) => {
                       field.onChange(event)

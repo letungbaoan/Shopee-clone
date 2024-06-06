@@ -1,12 +1,29 @@
-import { Link } from 'react-router-dom'
+import { Link, createSearchParams, useNavigate } from 'react-router-dom'
 import Popover from '../Popover'
 import { useMutation } from '@tanstack/react-query'
 import authApi from 'src/apis/auth.api'
 import { useContext } from 'react'
 import { AppContext } from 'src/contexts/app.context'
 import path from 'src/constants/path'
+import useQueryConfig from 'src/hooks/useQueryConfig'
+import { useForm } from 'react-hook-form'
+import { Schema, schema } from 'src/utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { omit } from 'lodash'
+
+type FormData = Pick<Schema, 'name'>
+
+const nameSchema = schema.pick(['name'])
 
 export default function Header() {
+  const navigate = useNavigate()
+  const queryConfig = useQueryConfig()
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      name: ''
+    },
+    resolver: yupResolver(nameSchema)
+  })
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const logoutAccountMutation = useMutation({
     mutationFn: authApi.logoutAccount,
@@ -14,6 +31,25 @@ export default function Header() {
       setIsAuthenticated(false)
       setProfile(null)
     }
+  })
+
+  const onSubmitSeacrh = handleSubmit((data) => {
+    const config = queryConfig.order
+      ? omit(
+          {
+            ...queryConfig,
+            name: data.name
+          },
+          ['order', 'sort_by']
+        )
+      : {
+          ...queryConfig,
+          name: data.name
+        }
+    navigate({
+      pathname: path.home,
+      search: createSearchParams(config).toString()
+    })
   })
 
   const handleLogout = () => {
@@ -119,13 +155,13 @@ export default function Header() {
               </g>
             </svg>
           </Link>
-          <form className='col-span-9'>
+          <form className='col-span-9' onSubmit={onSubmitSeacrh}>
             <div className='flex rounded-sm bg-white p-1'>
               <input
                 type='text'
-                name='search'
                 className='flex-grow border-none bg-transparent px-3 py-2 text-black outline-none'
                 placeholder='FREESHIP ĐƠN TỪ 0Đ'
+                {...register('name')}
               />
               <button className='flex-shrink-0 rounded-sm bg-orange px-6 py-2 hover:opacity-90'>
                 <svg

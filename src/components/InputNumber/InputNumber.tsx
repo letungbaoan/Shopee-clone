@@ -27,12 +27,13 @@ const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(function Inpu
       setLocalValue(value)
     }
   }
+
   return (
     <div className={className}>
       <input
         className={classNameInput}
         onChange={handleChange}
-        value={value === undefined ? localValue : value}
+        value={value || localValue}
         {...rest}
         ref={ref}
       />

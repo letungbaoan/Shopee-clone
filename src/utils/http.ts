@@ -52,6 +52,9 @@ class Http {
           console.log(message)
           toast.error(message)
         }
+        if(error.response?.status === HttpStatusCode.Unauthorized) {
+          clearLS()
+        }
         return Promise.reject(error)
       }
     )

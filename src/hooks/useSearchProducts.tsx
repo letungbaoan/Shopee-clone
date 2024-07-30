@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import useQueryConfig from './useQueryConfig'
 import { omit } from 'lodash'

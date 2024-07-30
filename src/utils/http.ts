@@ -47,13 +47,14 @@ class Http {
         return response
       },
       function (error: AxiosError) {
+        console.log(error)
         if (error.response?.status !== HttpStatusCode.UnprocessableEntity) {
           const data: any | undefined = error.response?.data
           const message = data?.message || error.message
           console.log(message)
           toast.error(message)
         }
-        if(error.response?.status === HttpStatusCode.Unauthorized) {
+        if (error.response?.status === HttpStatusCode.Unauthorized) {
           clearLS()
         }
         return Promise.reject(error)

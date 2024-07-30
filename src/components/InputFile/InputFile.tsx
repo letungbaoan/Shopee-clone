@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { toast } from 'react-toastify'
 import config from 'src/constants/config'
 
@@ -8,7 +8,6 @@ interface Props {
 
 export default function InputFile({onChange} : Props) {
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [file, setFile] = useState<File>()
   const handleUpload = () => {
     fileInputRef.current?.click()
   }

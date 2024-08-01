@@ -13,7 +13,7 @@ import path from 'src/constants/path'
 import Input from 'src/components/Input'
 
 type FormData = Pick<Schema, 'email' | 'password'>
-const loginSchema = schema.pick(['email','password'])
+const loginSchema = schema.pick(['email', 'password'])
 
 export default function Login() {
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
@@ -31,7 +31,6 @@ export default function Login() {
     mutationFn: (body: FormData) => authApi.loginAccount(body)
   })
 
-  
   const onSubmit = handleSubmit((data) => {
     loginAccountMutation.mutate(data, {
       onSuccess: (data) => {
@@ -77,6 +76,7 @@ export default function Login() {
                 register={register}
                 type='password'
                 className='mt-3'
+                classNameEye='absolute right-[5px] h-5 w-5 cursor-pointer top-[12px]'
                 errorMessage={errors.password?.message}
                 placeholder='Password'
               />

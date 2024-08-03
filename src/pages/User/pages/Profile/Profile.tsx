@@ -160,7 +160,7 @@ export default function Profile() {
   return (
     <div className='rounded-sm bg-white px-2 pb-10 shadow md:px-7 md:pb-20'>
       <Helmet>
-        <title>Hồ sơ của tôi | Shopee Clone</title>
+        <title>Tài khoản của tôi | Shopee Clone</title>
         <meta name='description' content='Hồ sơ của tôi' />
       </Helmet>
       <div className='border-b border-b-gray-200 py-6'>
